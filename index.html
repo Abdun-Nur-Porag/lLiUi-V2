@@ -16,9 +16,160 @@
   <script src="/js/liui.convert.js"></script>
   <!---main js-->
   <script src="main.js"></script>
+  <script src="/js/card.js"></script>
   
   </head>
 <body>
+  <style>
+  :root,
+body.light{
+  --body:#3B3B3B;
+--app-bar:#4F4F4F;
+  --my:#FFCC00
+  --card:#242424;
+  --error:#F5CF06
+}
+ .dialogBack{
+   background-color:var(--my);
+ }
+ body{
+   background-color:var(--body);
+ }
+  </style>
+  <script>
   
+  
+  const app_bar=appBar()
+.child([
+  appBarBody().child([
+    appBarBodyLeft().child([
+      h4().text("Example")
+      ]),//app bar 
+      
+     max(),//max
+     
+    appBarBodyCenter().child([]),//app bar center
+    appBarBodyRight().child([])
+    ])//app bar body
+   .class(["bold"])// app bar body style
+   .style({
+    backgroundColor:"var(--app-bar)",
+    border:"1px solid black",
+    color:"white"
+   })//app bar body style
+   
+  ])//app bar
+.add("body")//========app bar=====
+ 
+//card
+const my_card=create("article")
+.child([
+  img().class(["small","responsive"]).attrs({
+    src:"/img/liui.png"
+  }),//img
+  create("div").child([
+    h4().text("Learn Carbon LLM"),//title
+    p().text("Carbob LLM is powerfull tool of AI.It is trained about 15K data"),//info
+    nav().child([
+      button().class(["outlined"]).html("Take It")
+      ])//button
+    ]).class(["padding"])//card body
+  ])
+ .class(["no-padding","no-round"])//card
+.style({
+  margin:"4%",
+  borderRadius:"10px 10px 0px 0px",
+  backgroundColor:"var(--card)",
+  color:"white"
+})//card
+  .add("body")//=========end======
+ 
+ 
+ 
+ const is_online = navigator.onLine
+ console.log(is_online)
+ if (is_online==true){
+   
+   
+   
+  const network_success_dialog=dialog()//dialog
+  .class(["active","top","dialogBack"])
+  .style({
+    height:"100px",
+    backgroundColor:"var(--success)",
+    borderBottomLeftRadius:"10px"
+  })
+  .add("body")
+ .child([
+   list().child([
+     listItem().child([
+       listItemLeft().child([
+         i().class(["large"]).text("check")
+         ]),//list itm left
+       listItemCenter().child([
+         listItemTitle().class(["bold"]).text("Online"),//title
+         listItemSubTitle().text("You are online now.")//subtitle
+         ]),//list item center
+       listItemRight().child([])//list
+       ])//list item right
+     ])//list
+   ])//child
+   //end dialog
+ .onLoad(()=>{
+   
+  timer = setTimeout(() => {
+  network_success_dialog.style({
+    display: "none"
+  })
+}, 1000)
+})//end onload
+
+   
+ }
+ else{
+
+  const network_error_dialog=dialog()//dialog
+  .class(["active","top","dialogBack"])
+  .style({
+    height:"100px",
+    backgroundColor:"var(--error)",
+    borderBottomLeftRadius:"10px"
+  })
+  .add("body")
+ .child([
+   list().child([
+     listItem().child([
+       listItemLeft().child([
+         i().class(["large"]).text("info")
+         ]),//list itm left
+       listItemCenter().child([
+         listItemTitle().class(["bold"]).text("Network Error"),//title
+         listItemSubTitle().text("Check You Network Connection")//subtitle
+         ]),//list item center
+       listItemRight().child([])//list
+       ])//list item right
+     ])//list
+   ])//child
+   //end dialog
+ .onLoad(()=>{
+   
+  timer = setTimeout(() => {
+  network_error_dialog.style({
+    display: "none"
+  })
+}, 1000)
+})//end onload
+//----------Dialog--------
+ }// end else
+
+
+
+ 
+    
+    
+  </script>
+<script>
+  
+</script>
 </body>
 </html>
